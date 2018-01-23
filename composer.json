@@ -1,0 +1,19 @@
+{
+    "name": "moon/couchbaserestclient",
+    "Description": "Laravel Artisan as a Package",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "authors": [
+        {
+            "name": "moon0326",
+            "email": "kmk1986@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Moon\\CouchbaseRestClient\\": "./src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
