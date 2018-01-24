@@ -107,4 +107,9 @@ class CouchbaseRestApiClient implements CouchbaseApiClient
     {
         return new ViewQueryUrlBuilder($this->username, $this->password, $designDocument, $viewName);
     }
+
+    public function createViewPaginator($designDocument, $viewName)
+    {
+        return new ViewPaginator($this, $designDocument, $viewName);
+    }
 }
