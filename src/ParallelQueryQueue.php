@@ -10,9 +10,9 @@ class ParallelQueryQueue
      * @var CouchbaseApiClient
      */
     private $client;
-
     private $queryStrings = [];
     private $ready = false;
+
     /**
      * @var int
      */
@@ -37,28 +37,10 @@ class ParallelQueryQueue
         $this->queryStrings[] = $queryString;
     }
 
-    public function partitionArray($items, $perPage) {
-        $listLength = count($items);
-        if ($perPage > $listLength) {
-            return [$items];
-        }
-        $partitionLength = floor($listLength / $perPage);
-        $partrem = $listLength % $perPage;
-        $partition = array();
-        $mark = 0;
-        for ($px = 0; $px < $perPage; $px++) {
-            $incr = ($px < $partrem) ? $partitionLength + 1 : $partitionLength;
-            $partition[$px] = array_slice( $items, $mark, $incr );
-            $mark += $incr;
-        }
-
-        return $partition;
-    }
-
     private function prepare()
     {
         $this->queryPages = array_chunk($this->queryStrings, $this->concurrency);
-        $this->totalPages = count($this->queryStrings);
+        $this->totalPages = count($this->queryPages) - 1;
         $this->ready = true;
     }
 
@@ -74,7 +56,7 @@ class ParallelQueryQueue
             $this->prepare();
         }
 
-        if (!isset($this->queryPages[$this->currentPage])) {
+        if ($this->currentPage > $this->totalPages) {
             return null;
         }
 
@@ -87,6 +69,7 @@ class ParallelQueryQueue
         foreach (Promise\unwrap($promises) as $key => $result) {
             $results[] = json_decode((string) $result->getBody())->results;
         }
+
         $this->currentPage++;
         return $results;
     }
