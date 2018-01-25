@@ -14,7 +14,7 @@ use Exception;
  * Class CouchbaseRestApi
  * @package Hue\CouchbaseEtl
  */
-class CouchbaseRestApiClient implements CouchbaseApiClient
+class CouchbaseRestApiClient
 {
     private $username;
     private $password;

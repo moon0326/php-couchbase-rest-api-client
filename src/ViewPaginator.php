@@ -23,14 +23,7 @@ class ViewPaginator implements \Iterator
     private $designDocument;
     private $viewName;
 
-    /**
-     * @var Key
-     */
     private $startKey;
-
-    /**
-     * @var Key
-     */
     private $endKey;
 
     /**

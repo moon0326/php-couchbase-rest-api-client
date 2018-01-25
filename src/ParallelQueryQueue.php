@@ -7,7 +7,7 @@ use GuzzleHttp\Promise;
 class ParallelQueryQueue
 {
     /**
-     * @var CouchbaseApiClient
+     * @var CouchbaseRestApiClient
      */
     private $client;
     private $queryStrings = [];
@@ -23,10 +23,10 @@ class ParallelQueryQueue
 
     /**
      * ParallelQueryQueue constructor.
-     * @param CouchbaseApiClient $client
+     * @param CouchbaseRestApiClient $client
      * @param int $concurrency
      */
-    public function __construct(CouchbaseApiClient $client, $concurrency = 3)
+    public function __construct(CouchbaseRestApiClient $client, $concurrency = 3)
     {
         $this->client = $client;
         $this->concurrency = $concurrency;
