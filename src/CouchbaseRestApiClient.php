@@ -103,13 +103,32 @@ class CouchbaseRestApiClient implements CouchbaseApiClient
         return json_decode($response);
     }
 
+    /**
+     * @param $designDocument
+     * @param $viewName
+     * @return ViewQueryUrlBuilder
+     */
     public function createViewQueryBuilder($designDocument, $viewName)
     {
         return new ViewQueryUrlBuilder($this->username, $this->password, $designDocument, $viewName);
     }
 
+    /**
+     * @param $designDocument
+     * @param $viewName
+     * @return ViewPaginator
+     */
     public function createViewPaginator($designDocument, $viewName)
     {
         return new ViewPaginator($this, $designDocument, $viewName);
+    }
+
+    /**
+     * @param int $concurrency
+     * @return ParallelQueryQueue
+     */
+    public function createParallelQueryQueue($concurrency = 3)
+    {
+        return new ParallelQueryQueue($this, $concurrency);
     }
 }
