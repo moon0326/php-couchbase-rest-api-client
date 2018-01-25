@@ -35,13 +35,13 @@ class CouchbaseRestApiClient
      * @param $bucketName
      * @param null $n1qlHost
      */
-    public function __construct(Client $client, $host, $username, $password, $bucketName, $n1qlHost = null)
+    public function __construct($host, $username, $password, $bucketName, $n1qlHost = null)
     {
         $this->viewHost = $host;
         $this->username = $username;
         $this->password = $password;
         $this->bucketName = $bucketName;
-        $this->client = $client;
+        $this->client = new Client();
         $this->n1qlHost = $n1qlHost;
     }
 
