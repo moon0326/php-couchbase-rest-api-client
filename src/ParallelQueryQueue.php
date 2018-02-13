@@ -66,8 +66,14 @@ class ParallelQueryQueue
         }
 
         $results = [];
-        foreach (Promise\unwrap($promises) as $key => $result) {
-            $results[] = json_decode((string) $result->getBody())->results;
+        try {
+            foreach (Promise\unwrap($promises) as $key => $result) {
+                $results[] = json_decode((string)$result->getBody())->results;
+            }
+        } catch (\Exception $e) {
+            var_dump($this->queryPages[$this->currentPage]);
+            var_dump((string) $e->getResponse()->getBody()->getContents());
+            exit;
         }
 
         $this->currentPage++;

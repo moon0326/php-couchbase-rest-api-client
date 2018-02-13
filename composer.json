@@ -1,6 +1,6 @@
 {
     "name": "moon/couchbaserestclient",
-    "Description": "Laravel Artisan as a Package",
+    "Description": "Couchbase REST API client in PHP",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
     },
@@ -10,9 +10,17 @@
             "email": "kmk1986@gmail.com"
         }
     ],
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
     "autoload": {
         "psr-4": {
             "Moon\\CouchbaseRestClient\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Moon\\CouchbaseRestClient\\Test\\": "./src/tests"
         }
     },
     "minimum-stability": "stable"

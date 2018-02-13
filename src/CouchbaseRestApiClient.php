@@ -28,7 +28,6 @@ class CouchbaseRestApiClient
 
     /**
      * CouchbaseRestApi constructor.
-     * @param Client $client
      * @param $host
      * @param $username
      * @param $password
