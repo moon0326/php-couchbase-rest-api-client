@@ -44,11 +44,17 @@ class CouchbaseRestApiClient
         $this->n1qlHost = $n1qlHost;
     }
 
+    /**
+     * @return mixed
+     */
     public function getBucketName()
     {
         return $this->bucketName;
     }
 
+    /**
+     * @param $host
+     */
     public function setN1qlHost($host)
     {
         $parsedUrl = parse_url($host);
@@ -59,6 +65,11 @@ class CouchbaseRestApiClient
         }
     }
 
+    /**
+     * @param $queryString
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @throws Exception
+     */
     public function queryN1qlAsync($queryString)
     {
         if ($this->n1qlHost === null) {
@@ -75,6 +86,11 @@ class CouchbaseRestApiClient
         ]);
     }
 
+    /**
+     * @param $queryString
+     * @return mixed
+     * @throws Exception
+     */
     public function queryN1ql($queryString)
     {
         if ($this->n1qlHost === null) {
@@ -94,6 +110,10 @@ class CouchbaseRestApiClient
         return json_decode($response);
     }
 
+    /**
+     * @param ViewQueryUrlBuilder $viewQueryUrlBuilder
+     * @return mixed
+     */
     public function queryView(ViewQueryUrlBuilder $viewQueryUrlBuilder)
     {
         $url = $viewQueryUrlBuilder->build($this->viewHost, $this->bucketName);
