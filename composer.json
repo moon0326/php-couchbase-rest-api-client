@@ -11,7 +11,8 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "symfony/var-dumper": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -20,8 +21,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Moon\\CouchbaseRestClient\\Test\\": "./src/tests"
-        }
+            "Moon\\CouchbaseRestClient\\Tests\\": "./tests"
+        },
+        "files": [
+            "./tests/helpers.php"
+        ]
+
     },
     "minimum-stability": "stable"
 }

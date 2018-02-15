@@ -37,11 +37,16 @@ class ParallelQueryQueue
         $this->queryStrings[] = $queryString;
     }
 
-    private function prepare()
+    public function prepare()
     {
         $this->queryPages = array_chunk($this->queryStrings, $this->concurrency);
         $this->totalPages = count($this->queryPages) - 1;
         $this->ready = true;
+    }
+
+    public function getTotalPages()
+    {
+        return $this->totalPages;
     }
 
     /**

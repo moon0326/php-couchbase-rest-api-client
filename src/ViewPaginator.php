@@ -25,7 +25,6 @@ class ViewPaginator implements \Iterator
 
     private $startKey;
     private $endKey;
-    private $groupLevel;
 
     /**
      * DocumentKeysExporter constructor.
@@ -40,11 +39,6 @@ class ViewPaginator implements \Iterator
         $this->couchbaseRestApi = $couchbaseRestApi;
         $this->designDocument = $designDocument;
         $this->viewName = $viewName;
-    }
-
-    public function setItemsPerPage($itemsPerPage)
-    {
-        $this->itemsPerPage = $itemsPerPage;
     }
 
     public function setStartKey($startKey)
@@ -77,17 +71,13 @@ class ViewPaginator implements \Iterator
     private function count()
     {
         $count = $this->getResponse(1, 0, true, $this->startKey, $this->endKey);
-        if (!$count) {
-            $this->totalRows = 0;
-        } else {
-            $this->totalRows = $count[0]->value;
-        }
+        $this->totalRows = $count[0]->value;
         $this->reduce = false;
     }
 
-    public function setGroupLevel($level)
+    public function setItemsPerPage($value)
     {
-        $this->groupLevel = $level;
+        $this->itemsPerPage = $value;
     }
 
     public function getResponse($limit, $skip, $reduce = false, $startKey = null, $endKey = null, $groupLevel = null)
@@ -109,9 +99,6 @@ class ViewPaginator implements \Iterator
             $queryBuilder->endKey($endKey);
         }
 
-        if ($this->groupLevel) {
-            $queryBuilder->groupLevel($this->groupLevel);
-        }
 
         if ($groupLevel) {
             $queryBuilder->groupLevel($groupLevel);

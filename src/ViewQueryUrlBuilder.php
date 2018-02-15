@@ -123,6 +123,16 @@ class ViewQueryUrlBuilder
     {
         $credentials = $this->username.':'.$this->password;
         $this->parameters = array_filter($this->parameters);
+
+        $parsedUrl = parse_url($host);
+
+        if (!isset($parsedUrl['scheme'])) {
+            $parsedUrl['scheme'] = 'https';
+            $host = $parsedUrl['path'];
+        } else {
+            $host = $parsedUrl['host'];
+        }
+
         $url = implode('/', [
             $host,
             $bucketName,
@@ -140,6 +150,6 @@ class ViewQueryUrlBuilder
             $queryString .= "{$key}={$parameter}&";
         }
 
-        return "http://".$credentials.'@'.$url."?".$queryString;
+        return "{$parsedUrl['scheme']}://".$credentials.'@'.$url."?".$queryString;
     }
 }
