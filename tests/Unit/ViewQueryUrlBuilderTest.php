@@ -35,8 +35,8 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_builds_with_parameters()
     {
-        $this->instance->key('test');
-        $this->instance->reduce(false);
+        $this->instance->setKey('test');
+        $this->instance->setReduce(false);
         $url = $this->instance->build('https://test.com', 'default');
         $expected = 'https://username:password@test.com/default/_design/designDocument/_view/viewName?key=%22test%22&reduce=false&pretty=false&';
         $this->assertEquals($expected, $url);
@@ -61,7 +61,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_group_level()
     {
-        $this->instance->groupLevel(1);
+        $this->instance->setGroupLevel(1);
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "group_level=1"));
     }
@@ -71,7 +71,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_group()
     {
-        $this->instance->group();
+        $this->instance->setGroup();
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "group=1"));
     }
@@ -82,7 +82,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_key()
     {
-        $this->instance->key('key');
+        $this->instance->setKey('key');
         $url = $this->instance->build("test.com", "default");
         // values get escaped %22 = "
         $this->assertNotFalse(strpos($url, "key=%22key%22"));
@@ -93,7 +93,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_keys()
     {
-        $this->instance->keys(['a','b']);
+        $this->instance->setKeys(['a','b']);
         $url = $this->instance->build("test.com", "default");
         // %5B%22a%22%2C%22b%22%5D = ["a","b"]
         $this->assertNotFalse(strpos($url, "keys=%5B%22a%22%2C%22b%22%5D"));
@@ -105,7 +105,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_limit()
     {
-        $this->instance->limit(1);
+        $this->instance->setLimit(1);
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "limit=1"));
     }
@@ -116,7 +116,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_skip()
     {
-        $this->instance->skip(1);
+        $this->instance->setSkip(1);
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "skip=1"));
     }
@@ -127,7 +127,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_reduce()
     {
-        $this->instance->reduce(true);
+        $this->instance->setReduce(true);
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "reduce=true"));
     }
@@ -138,7 +138,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_start_key()
     {
-        $this->instance->startKey('test');
+        $this->instance->setStartKey('test');
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "startkey=%22test%22"));
     }
@@ -149,7 +149,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_end_key()
     {
-        $this->instance->endKey('test');
+        $this->instance->setEndKey('test');
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "endkey=%22test%22"));
     }
@@ -160,7 +160,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_start_key_doc_id()
     {
-        $this->instance->startKeyDocId('test');
+        $this->instance->setStartKeyDocId('test');
         $url = $this->instance->build("test.com", "default");
         // notice that we don't escape startkey_docid
         // don't ask me. That's how CB works :)
@@ -173,7 +173,7 @@ class ViewQueryUrlBuilderTest extends TestCase
      */
     public function it_sets_both_start_key_and_end_key()
     {
-        $this->instance->range('start', 'end');
+        $this->instance->setRange('start', 'end');
         $url = $this->instance->build("test.com", "default");
         $this->assertNotFalse(strpos($url, "startkey=%22start%22&endkey=%22end%22"));
     }

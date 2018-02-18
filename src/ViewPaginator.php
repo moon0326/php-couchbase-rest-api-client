@@ -2,7 +2,9 @@
 
 namespace Moon\CouchbaseRestClient;
 
-class ViewPaginator implements \Iterator
+use Iterator;
+
+class ViewPaginator implements Iterator
 {
     private $totalRows = 0;
     private $totalPages = 0;
@@ -27,7 +29,6 @@ class ViewPaginator implements \Iterator
     private $endKey;
 
     /**
-     * DocumentKeysExporter constructor.
      * @param CouchbaseRestApiClient $couchbaseRestApi
      * @param $designDocument
      * @param $viewName
@@ -61,7 +62,7 @@ class ViewPaginator implements \Iterator
         return $this->totalPages;
     }
 
-    public function prepare()
+    private function prepare()
     {
         $this->count();
         $this->totalPages = (int) ceil($this->totalRows / $this->itemsPerPage);
@@ -87,25 +88,25 @@ class ViewPaginator implements \Iterator
             $this->viewName
         );
 
-        $queryBuilder->limit($limit)
-            ->skip($skip)
-            ->reduce($reduce);
+        $queryBuilder->setLimit($limit)
+            ->setSkip($skip)
+            ->setReduce($reduce);
 
         if ($startKey) {
-            $queryBuilder->startKey($startKey);
+            $queryBuilder->setStartKey($startKey);
         }
 
         if ($endKey) {
-            $queryBuilder->endKey($endKey);
+            $queryBuilder->setEndKey($endKey);
         }
 
 
         if ($groupLevel) {
-            $queryBuilder->groupLevel($groupLevel);
+            $queryBuilder->setGroupLevel($groupLevel);
         }
 
         if ($this->startKeyDocId) {
-            $queryBuilder->startKeyDocId($this->startKeyDocId);
+            $queryBuilder->setStartKeyDocId($this->startKeyDocId);
         }
 
         $response = $this->couchbaseRestApi->queryView($queryBuilder);

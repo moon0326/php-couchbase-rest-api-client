@@ -3,7 +3,7 @@
 namespace Moon\CouchbaseRestClient;
 
 /**
- * Builders Couchbase View Query URL query string
+ * Builds Couchbase view query REST URL
  *
  * Class ViewQueryBuilder
  * @package Hue\CouchbaseEtl
@@ -54,67 +54,67 @@ class ViewQueryUrlBuilder
         return strtr(rawurlencode($str), $revert);
     }
 
-    public function group()
+    public function setGroup()
     {
         $this->parameters['group'] = true;
         return $this;
     }
 
-    public function key($key)
+    public function setKey($key)
     {
         $this->parameters['key'] = json_encode($key);
         return $this;
     }
 
-    public function keys(array $keys)
+    public function setKeys(array $keys)
     {
         $this->parameters['keys'] = json_encode($keys);
         return $this;
     }
 
-    public function limit($limit)
+    public function setLimit($limit)
     {
         $this->parameters['limit'] = $limit;
         return $this;
     }
 
-    public function skip($skip)
+    public function setSkip($skip)
     {
         $this->parameters['skip'] = $skip;
         return $this;
     }
 
-    public function reduce($boolean)
+    public function setReduce($boolean)
     {
         $this->parameters['reduce'] = json_encode($boolean);
         return $this;
     }
 
-    public function startKey($startKey)
+    public function setStartKey($startKey)
     {
         $this->parameters['startkey'] = json_encode($startKey);
         return $this;
     }
 
-    public function endKey($endKey)
+    public function setEndKey($endKey)
     {
         $this->parameters['endkey'] = json_encode($endKey);
         return $this;
     }
 
-    public function startKeyDocId($startKeyDocId)
+    public function setStartKeyDocId($startKeyDocId)
     {
         $this->parameters['startkey_docid'] = $startKeyDocId;
         return $this;
     }
 
-    public function range($startKey, $endKey)
+    public function setRange($startKey, $endKey)
     {
-        $this->startKey($startKey)->endKey($endKey);
+        $this->setStartKey($startKey)->setEndKey($endKey);
         return $this;
     }
 
-    public function groupLevel($groupLevel)
+    public function setGroupLevel($groupLevel)
     {
         $this->parameters['group_level'] = $groupLevel;
     }

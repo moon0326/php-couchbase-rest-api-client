@@ -73,7 +73,7 @@ class CouchbaseRestApiClient
     public function queryN1qlAsync($queryString)
     {
         if ($this->n1qlHost === null) {
-            throw new Exception("n1ql host is empty. Please check COUCHBASE_N1Ql_ENDPOINT or --n1ql-endpoint option value.");
+            throw new Exception("n1ql host is empty. Please set n1ql host by calling setN1qlHost method");
         }
         return $this->client->postAsync($this->n1qlHost, [
             'form_params' => [
@@ -94,7 +94,7 @@ class CouchbaseRestApiClient
     public function queryN1ql($queryString)
     {
         if ($this->n1qlHost === null) {
-            throw new Exception("n1ql host is empty. Please check COUCHBASE_N1Ql_ENDPOINT or --n1ql-endpoint option value.");
+            throw new Exception("n1ql host is empty. Please set n1ql host by calling setN1qlHost method");
         }
 
         $request = $this->client->post($this->n1qlHost, [
