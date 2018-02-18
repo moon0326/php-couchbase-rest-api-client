@@ -14,7 +14,7 @@ let you insert/get multiple docs even in PHP. However, You can't send multiple n
 update requests in parallel, which is not possible (or hard) with the official PHP SDK.
 
 ## Disadvantage
-- Couchbase Rest API endpoint may not perform as good as protocol used by the official SDK.
+- Couchbase Rest API endpoint may not perform as good as its official SDK, which takes advantage of its optimized protocol.
 
 ## Setup
 
