@@ -6,11 +6,7 @@ use GuzzleHttp\Client;
 use Exception;
 
 /**
- * Couchbase REST API wrapper
- * Supports only two endpoint at the moment
- * - query view
- * - query n1ql
- *
+ * CouchbaseRestApiClient can query n1ql and view
  * Class CouchbaseRestApi
  * @package Hue\CouchbaseEtl
  */
