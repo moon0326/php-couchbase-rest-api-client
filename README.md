@@ -8,7 +8,7 @@ Couchbase REST API wrapper to easily access view and n1ql queries without instal
 - Access Couchbase wihtout installing C and PHP SDK.
 - Supports parallel query processing by using multi-curl.
 
-Accessing Couchbase without installing C and PHP SDK is nice, but it is really not an big advantage as you don't really
+Accessing Couchbase without installing C and PHP SDK is nice, but it is really not n big advantage as you don't really
 uninstall C and PHP SDKs once you install them. Couchbase has batch operations (https://developer.couchbase.com/documentation/server/current/sdk/php/document-operations.html#topic_eqq_rmd_yv__batching), which
 let you insert/get multiple docs even in PHP. However, You can't send multiple n1ql queries in parallel in PHP SDK. One thing I find very useful with Couchbase REST API approach is that you can send multiple
 update requests in parallel, which is not possible (or hard) with the official PHP SDK.
