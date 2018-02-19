@@ -21,6 +21,7 @@ update requests in parallel, which is not possible (or hard) with the official P
 Create an instance of ```CouchbaseRestApiClient```
 ```php
 $client = new CouchbaseRestApiClient("http://couchbase:8091", "username", "password");
+$client->setN1qlHost("http://couchbase:8093/service/query");
 ```
 
 #### Querying View
