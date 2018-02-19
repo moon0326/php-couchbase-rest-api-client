@@ -54,16 +54,21 @@ class ViewPaginator implements Iterator
 
     public function getTotalItems()
     {
+        $this->prepare();
         return $this->totalRows;
     }
 
     public function getTotalPages()
     {
+        $this->prepare();
         return $this->totalPages;
     }
 
     private function prepare()
     {
+        if ($this->prepared) {
+            return;
+        }
         $this->count();
         $this->totalPages = (int) ceil($this->totalRows / $this->itemsPerPage);
         $this->prepared = true;
@@ -126,6 +131,8 @@ class ViewPaginator implements Iterator
      */
     public function current()
     {
+        $this->prepare();
+
         if ($this->currentPage === 0) {
             $skip = $this->itemsPerPage * $this->currentPage;
         } else {
@@ -173,9 +180,7 @@ class ViewPaginator implements Iterator
      */
     public function valid()
     {
-        if (!$this->prepared) {
-            $this->prepare();
-        }
+        $this->prepare();
         return $this->currentPage < $this->totalPages;
     }
 

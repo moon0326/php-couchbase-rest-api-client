@@ -28,16 +28,20 @@ class CouchbaseRestApiClient
      * @param $username
      * @param $password
      * @param $bucketName
-     * @param null $n1qlHost
+     * @param Client|null $client
+     * @internal param null $n1qlHost
      */
-    public function __construct($host, $username, $password, $bucketName, $n1qlHost = null)
+    public function __construct($host, $username, $password, $bucketName, Client $client = null)
     {
         $this->viewHost = $host;
         $this->username = $username;
         $this->password = $password;
         $this->bucketName = $bucketName;
-        $this->client = new Client();
-        $this->n1qlHost = $n1qlHost;
+
+        if (!$client) {
+            $client = new Client();
+        }
+        $this->client = $client;
     }
 
     /**
@@ -53,12 +57,8 @@ class CouchbaseRestApiClient
      */
     public function setN1qlHost($host)
     {
-        $parsedUrl = parse_url($host);
-        if (array_key_exists('path', $parsedUrl)) {
-            $this->n1qlHost = $host;
-        } else {
-            $this->n1qlHost = $host . '/service/query';
-        }
+        $this->n1qlHost = $host;
+        return $this;
     }
 
     /**
@@ -73,7 +73,7 @@ class CouchbaseRestApiClient
         }
         return $this->client->postAsync($this->n1qlHost, [
             'form_params' => [
-                'pretty' => false,
+                'pretty' => 'false',
                 'statement' => $queryString
             ],
             'headers' => [
@@ -95,6 +95,7 @@ class CouchbaseRestApiClient
 
         $request = $this->client->post($this->n1qlHost, [
             'form_params' => [
+                'pretty' => 'false',
                 'statement' => $queryString
             ],
             'headers' => [
