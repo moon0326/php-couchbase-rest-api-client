@@ -1,6 +1,12 @@
 # Couchbase REST API Client
 Couchbase REST API wrapper to easily access view and n1ql queries without installing Couchbase C and PHP SDK.
 
+## Installation
+
+```
+composer require moon/couchbaserestclient
+```
+
 ## Advantages
 
 - Access Couchbase wihtout installing C and PHP SDK.
