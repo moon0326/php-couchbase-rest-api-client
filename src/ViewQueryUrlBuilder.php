@@ -133,6 +133,10 @@ class ViewQueryUrlBuilder
             $host = $parsedUrl['host'];
         }
 
+        if (isset($parsedUrl['port'])) {
+            $host .= ':'.$parsedUrl['port'];
+        }
+
         $url = implode('/', [
             $host,
             $bucketName,
